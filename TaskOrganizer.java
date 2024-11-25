@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
@@ -64,9 +65,16 @@ public class TaskOrganizer {
                 case 1 -> {
                     System.out.println("Enter task description:");
                     String description = scanner.nextLine();
-                    System.out.println("Enter deadline (yyyy-MM-dd HH:mm):");
-                    String deadlineStr = scanner.nextLine();
-                    LocalDateTime deadline = LocalDateTime.parse(deadlineStr, formatter);
+                    LocalDateTime deadline = null;
+                    while (deadline == null) {
+                        System.out.println("Enter deadline (yyyy-MM-dd HH:mm):");
+                        String deadlineStr = scanner.nextLine();
+                        try {
+                            deadline = LocalDateTime.parse(deadlineStr, formatter);
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Invalid date format. Please try again.");
+                        }
+                    }
                     System.out.println("Enter priority (1-5):");
                     int priority = scanner.nextInt();
                     scanner.nextLine();  // Consume newline
