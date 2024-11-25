@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
 
 public class Task implements Comparable<Task> {
-    private String description;
+    private final String description;
     private LocalDateTime deadline;
     private int priority;
     private boolean completed;

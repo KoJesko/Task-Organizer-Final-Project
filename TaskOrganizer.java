@@ -25,7 +25,13 @@ public class TaskOrganizer {
     public void deleteTask(Task task) {
         this.tasks.remove(task);
         this.priorityQueue.remove(task);
-        this.categoryMap.get(task.getCategory()).remove(task);
+        ArrayList<Task> categoryTasks = this.categoryMap.get(task.getCategory());
+        if (categoryTasks != null) {
+            categoryTasks.remove(task);
+            if (categoryTasks.isEmpty()) {
+                this.categoryMap.remove(task.getCategory());
+            }
+        }
     }
 
     public ArrayList<Task> getTasksByCategory(String category) {
