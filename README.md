@@ -17,6 +17,7 @@ The application will allow users to:
         ArrayList: To store tasks dynamically.
         HashMap: To associate tasks with categories or priorities.
         PriorityQueue: For sorting tasks by priority levels.
+        Heaps: As implemented into priority queue.
 
     Algorithms:
         Sorting Algorithms: To order tasks by deadlines or priorities (e.g., Merge Sort or Quick Sort).
