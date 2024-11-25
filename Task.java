@@ -1,11 +1,12 @@
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Task implements Comparable<Task> {
-    private final String description;
+    private String description;
     private LocalDateTime deadline;
-    int priority;
+    private int priority;
+    private String category;
     private boolean completed;
-    private final String category;
 
     public Task(String description, LocalDateTime deadline, int priority, String category) {
         this.description = description;
@@ -15,23 +16,63 @@ public class Task implements Comparable<Task> {
         this.completed = false;
     }
 
-    // Getters and setters
-    public String getDescription() { return description; }
-    public LocalDateTime getDeadline() { return deadline; }
-    public int getPriority() { return priority; }
-    public boolean isCompleted() { return completed; }
-    public String getCategory() { return category; }
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDateTime getDeadline() {
+        return deadline;
+    }
 
     public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
     }
 
+    public int getPriority() {
+        return priority;
+    }
+
     public void setPriority(int priority) {
+        if (priority < 1 || priority > 5) {
+            throw new IllegalArgumentException("Priority must be between 1 and 5.");
+        }
         this.priority = priority;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public boolean isCompleted() {
+        return completed;
     }
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return priority == task.priority &&
+               Objects.equals(description, task.description) &&
+               Objects.equals(deadline, task.deadline) &&
+               Objects.equals(category, task.category);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, deadline, priority, category);
     }
 
     @Override
@@ -42,11 +83,11 @@ public class Task implements Comparable<Task> {
     @Override
     public String toString() {
         return "Task{" +
-                "description='" + description + '\'' +
-                ", deadline=" + deadline +
-                ", priority=" + priority +
-                ", completed=" + completed +
-                ", category='" + category + '\'' +
-                '}';
+               "description='" + description + '\'' +
+               ", deadline=" + deadline +
+               ", priority=" + priority +
+               ", category='" + category + '\'' +
+               ", completed=" + completed +
+               '}';
     }
 }
