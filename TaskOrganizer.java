@@ -23,16 +23,22 @@ public class TaskOrganizer {
     }
 
     public void deleteTask(Task task) {
+        // Remove the task from the main task list
         this.tasks.remove(task);
+        // Remove the task from the priority queue
         this.priorityQueue.remove(task);
+        // Retrieve the tasks for the specific category
         ArrayList<Task> categoryTasks = this.categoryMap.get(task.getCategory());
         if (categoryTasks != null) {
+            // Remove the task from the category list
             categoryTasks.remove(task);
+            // If the category list becomes empty, remove the category entry
             if (categoryTasks.isEmpty()) {
                 this.categoryMap.remove(task.getCategory());
             }
         }
     }
+    
 
     public ArrayList<Task> getTasksByCategory(String category) {
         return this.categoryMap.getOrDefault(category, new ArrayList<>());
@@ -50,7 +56,13 @@ public class TaskOrganizer {
             return (double) completedCount / this.tasks.size() * 100.0;
         }
     }
+    public ArrayList<Task> getTasks() {
+        return new ArrayList<>(tasks); // Return a copy to prevent external modification
+    }
 
+    public HashMap<String, ArrayList<Task>> getCategoryMap() {
+        return new HashMap<>(categoryMap); // Return a copy to prevent external modification
+    }
     public static void main(String[] args) {
         TaskOrganizer organizer = new TaskOrganizer();
         Scanner scanner = new Scanner(System.in);

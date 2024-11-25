@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 public class Task implements Comparable<Task> {
     private final String description;
     private LocalDateTime deadline;
-    private int priority;
+    int priority;
     private boolean completed;
     private final String category;
 
