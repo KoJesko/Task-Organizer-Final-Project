@@ -56,7 +56,8 @@ public class TaskOrganizer {
             System.out.println("2. View Tasks by Category");
             System.out.println("3. View Next Priority Task");
             System.out.println("4. View Completion Rate");
-            System.out.println("5. Exit");
+            System.out.println("5. Delete Task");
+            System.out.println("6. Exit");
 
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume newline
@@ -105,6 +106,23 @@ public class TaskOrganizer {
                 }
                 case 4 -> System.out.println("Completion rate: " + organizer.getCompletionRate() + "%");
                 case 5 -> {
+                    System.out.println("Enter task description to delete:");
+                    String descriptionToDelete = scanner.nextLine();
+                    Task taskToDelete = null;
+                    for (Task task : organizer.tasks) {
+                        if (task.getDescription().equals(descriptionToDelete)) {
+                            taskToDelete = task;
+                            break;
+                        }
+                    }
+                    if (taskToDelete != null) {
+                        organizer.deleteTask(taskToDelete);
+                        System.out.println("Task deleted successfully.");
+                    } else {
+                        System.out.println("Task not found.");
+                    }
+                }
+                case 6 -> {
                     System.out.println("Exiting...");
                     scanner.close();
                     return;

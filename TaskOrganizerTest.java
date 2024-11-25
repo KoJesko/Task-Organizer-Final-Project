@@ -21,16 +21,7 @@ public class TaskOrganizerTest {
         assertEquals("Complete assignment", tasks.get(0).getDescription());
     }
 
-    @Test
-    public void testDeleteTask() {
-        LocalDateTime deadline = LocalDateTime.of(2023, 10, 15, 23, 59);
-        Task task = new Task("Complete assignment", deadline, 1, "School");
-        organizer.addTask(task.getDescription(), task.getDeadline(), task.getPriority(), task.getCategory());
-        organizer.deleteTask(task);
-        ArrayList<Task> tasks = organizer.getTasksByCategory("School");
-        assertEquals(0, tasks.size());
-    }
-
+    
     @Test
     public void testGetTasksByCategory() {
         LocalDateTime deadline = LocalDateTime.of(2023, 10, 15, 23, 59);
@@ -41,7 +32,24 @@ public class TaskOrganizerTest {
         assertEquals(1, schoolTasks.size());
         assertEquals(1, personalTasks.size());
     }
+    @Test
+    public void testDeleteTask() {
+        LocalDateTime deadline = LocalDateTime.of(2023, 10, 15, 23, 59);
+        Task task = new Task("Complete assignment", deadline, 1, "School");
+        organizer.addTask(task.getDescription(), task.getDeadline(), task.getPriority(), task.getCategory());
 
+        // Verify the task was added
+        ArrayList<Task> tasks = organizer.getTasksByCategory("School");
+        assertEquals(1, tasks.size());
+        assertEquals("Complete assignment", tasks.get(0).getDescription());
+
+        // Delete the task
+        organizer.deleteTask(task);
+
+        // Verify the task was deleted
+        tasks = organizer.getTasksByCategory("School");
+        assertEquals(0, tasks.size());
+    }
     @Test
     public void testGetNextPriorityTask() {
         LocalDateTime deadline = LocalDateTime.of(2023, 10, 15, 23, 59);
