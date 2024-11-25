@@ -75,8 +75,19 @@ public class TaskOrganizer {
                             System.out.println("Invalid date format. Please try again.");
                         }
                     }
-                    System.out.println("Enter priority (1-5):");
-                    int priority = scanner.nextInt();
+                    int priority = 0;
+                    while (priority < 1 || priority > 5) {
+                        System.out.println("Enter priority (1-5):");
+                        if (scanner.hasNextInt()) {
+                            priority = scanner.nextInt();
+                            if (priority < 1 || priority > 5) {
+                                System.out.println("Invalid priority. Please enter a number between 1 and 5.");
+                            }
+                        } else {
+                            System.out.println("Invalid input. Please enter a number between 1 and 5.");
+                            scanner.next(); // Consume invalid input
+                        }
+                    }
                     scanner.nextLine();  // Consume newline
                     System.out.println("Enter category:");
                     String category = scanner.nextLine();
