@@ -24,3 +24,6 @@ The application will allow users to:
         Search Algorithms: To implement task search functionality (e.g., Binary Search for sorted lists).
         Custom Comparators: For sorting tasks based on user-selected criteria.
 
+# How do the unit tests work
+
+    The unit tests use JUnit Jupiter.
