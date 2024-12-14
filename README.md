@@ -1,4 +1,4 @@
-d# Task-Organizer-Final-Project
+# Task-Organizer-Final-Project
 The Task Organizer Application is designed for students, professionals, and anyone looking to manage their daily tasks efficiently. It is a lightweight tool to help users plan, prioritize, and track their activities while providing a simple, user-friendly interface.
 
 # Description
@@ -24,3 +24,6 @@ The application will allow users to:
         Search Algorithms: To implement task search functionality (e.g., Binary Search for sorted lists).
         Custom Comparators: For sorting tasks based on user-selected criteria.
 
+# How do the unit tests work
+
+    The unit tests use JUnit Jupiter.
