@@ -74,4 +74,32 @@ public class TaskOrganizerTest {
         task.setCompleted(true);
         assertEquals(50.0, organizer.getCompletionRate());
     }
+    @Test
+    public void testDeleteNonExistentTask() {
+        LocalDateTime deadline = LocalDateTime.of(2023, 10, 15, 23, 59);
+        organizer.addTask("Complete assignment", deadline, 1, "School");
+
+        // Attempt to delete a non-existent task
+        organizer.deleteTask("Non-existent task");
+
+        // Verify the task list remains unchanged
+        ArrayList<Task> tasks = organizer.getTasksByCategory("School");
+        assertEquals(1, tasks.size());
+        assertEquals("Complete assignment", tasks.get(0).getDescription());
+    }
+
+    @Test
+    public void testAddTaskWithInvalidPriority() {
+        LocalDateTime deadline = LocalDateTime.of(2023, 10, 15, 23, 59);
+
+        // Attempt to add a task with an invalid priority
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            organizer.addTask("Complete assignment", deadline, 6, "School");
+        });
+
+        // Verify the exception message
+        String expectedMessage = "Priority must be between 1 and 5.";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 }

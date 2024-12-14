@@ -121,6 +121,7 @@ public class TaskOrganizer {
                 case 3 -> {
                     Task nextTask = organizer.getNextPriorityTask();
                     System.out.println("Next priority task: " + (nextTask != null ? nextTask.getDescription() : "None"));
+                    //break;
                 }
                 case 4 -> System.out.println("Completion rate: " + organizer.getCompletionRate() + "%");
                 case 5 -> {
